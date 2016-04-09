@@ -6,7 +6,9 @@ from sample_scan import Sample_Scan
 
 from wifi_type import Wifi_Type_Scan
 
-SCANS = [Sample_Scan(), Wifi_Type_Scan()]
+from wifi_admin import Wifi_Admin_Scan
+
+SCANS = [Sample_Scan(), Wifi_Type_Scan(), Wifi_Admin_Scan()]
 
 def get_total_scan_score():
     total = 0
