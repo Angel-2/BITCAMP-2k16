@@ -35,3 +35,7 @@ wifi==0.3.8
 wsgiref==0.1.2
 python-nmap
 pymongo
+ecdsa
+paramiko
+pycrypto
+spur
