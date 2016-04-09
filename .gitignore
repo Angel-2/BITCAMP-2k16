@@ -1,3 +1,7 @@
 # ignore emacs backups
 *~
+# ignore vim backups
+*.swo
+*.swp
+# ignore compiled python files
 *.pyc
