@@ -1,6 +1,5 @@
 from driver import get_total_scan_score
-
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 from flask_bootstrap import Bootstrap
 
 
@@ -24,10 +23,10 @@ def redirect_root():
 def redirect_load():
     return render_template(LOAD_TEMPLATE)
 
-@app.route('/scan')
+@app.route('/scan',methods=["POST"])
 def redirect_scan():
     total = get_total_scan_score()
-    return render_template(SCAN_TEMPLATE, total = total)
+    return render_template(SCAN_TEMPLATE, total=total, network=request.form["network"], password_field=request.form["password_field"])
 
 if __name__ == '__main__':
     app.run()

@@ -7,10 +7,11 @@ from wifi_type import Wifi_Type_Scan
 from mongo import Mongo_Scan
 from ssh import SSH_Scan
 from ftp import FTP_Scan
-
 from wifi_admin import Wifi_Admin_Scan
 
 SCANS = [Sample_Scan(), Wifi_Type_Scan(), Wifi_Admin_Scan(), Mongo_Scan(), SSH_Scan(), FTP_Scan()]
+
+
 
 def get_total_scan_score():
     total = 0

@@ -9,35 +9,33 @@
   {% endblock %}
   
   {% block content %}
-    <h1>Pido</h1>
+    <h1>PyScan</h1>
     
-    <form action='/load'>
+    <form method="post" action='/scan'>
       
       <p class='instruction'>Select your WiFi network</p>
       
       <div class='parent'>
-        <select class='child select form-control'>
+        <select class='child select form-control' name='network'>
           <option>Select a network</option>
-          <option>Network 1</option>
-          <option>Network 2</option>
-          <option>Network 3</option>
-          <option>Network 4</option>
-          <option>Network 5</option>
+          <option id='network_1'>Network 1</option>
+          <option id='network_2'>Network 2</option>
+          <option id='network_3'>Network 3</option>
+          <option id='network_4'>Network 4</option>
+          <option id='network_5'>Network 5</option>
         </select>'
       </div>
-      
-      <br>
-      
+            
       <p class='instruction'>Enter your WiFi password</p>
       
       <div class='parent'>
-        <input type='password' class='child form-control'></input>
+        <input type='password' id='input_text' name='password_field' class='child form-control'></input>
       </div>
-      
-      <br>
-      
+                
+      <p class='instruction'>Search for vulnerabilities</p>	
+
       <div class='parent'>
-        <button class='child btn btn-default'>Submit</select>
+        <input type='submit' value='Submit' class='child btn btn-default'></input>
       </div>
 
     </form> 
