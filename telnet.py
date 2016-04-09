@@ -2,6 +2,7 @@
 # which returns a value from 0 to 100, inclusive
 # 100 is the best score, 0 is the worst
 
+# import exp_runner
 import nmap
 import telnetlib
 
@@ -20,8 +21,22 @@ class Telnet_Scan:
                 # using each of the auth combos
                 for auth in auths:
                     try:
+                        # should we also try to check for telnet servers
+                        # that offer a shell without any attempt at auth?
                         conn = telnetlib.Telnet(host, TELNET_PORT_NUM)
-                        return 0 # we only get here if ftp connected!
+                        conn.expect(["login: ", "Login: "], 5)
+                        conn.write(auth[0] + "\r\n")
+                        conn.expect(["Password: ", "password"], 5)
+                        conn.write(auth[1] + "\r\n")
+                        conn.write("\r\n")
+                        (i, obj, res) = conn.expect(["Incorrect", "incorrect"], 5)
+                        conn.close()
+
+                        if i != -1: # auth failure
+                            continue
+                        else:
+                            if any(map(lambda x: x in res, ["#", "$", ">"])) or len(res) > 500:
+                                return 0
                     except:
                         continue
         return 100 # way hella
