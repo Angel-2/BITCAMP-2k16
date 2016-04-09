@@ -10,8 +10,8 @@ MONGO_PORT_NUM = int(MONGO_PORT)
 
 class Mongo_Scan:
     def run_scan(self):
-        nm = nmap.Port_Scanner()
-        nm.scan('192.168.0.1-192.168.255.255', MONGO_PORT) # scan everything on default mongo port
+        nm = nmap.PortScanner()
+        nm.scan('192.168.0.1/24', MONGO_PORT) # scan everything on default mongo port
         for host in nm.all_hosts():
             if nm[host].has_tcp() and nm[host]['tcp'][MONGO_PORT]['state'] == 'open':
               # for each host that's open on MONGO_PORT, try to connect
