@@ -3,10 +3,10 @@
 # write functions to call them as appropriate
 
 from sample_scan import Sample_Scan
-
 from wifi_type import Wifi_Type_Scan
+from mongo_scan import Mongo_Scan
 
-SCANS = [Sample_Scan(), Wifi_Type_Scan()]
+SCANS = [Sample_Scan(), Wifi_Type_Scan(), Mongo_Scan()]
 
 def get_total_scan_score():
     total = 0
