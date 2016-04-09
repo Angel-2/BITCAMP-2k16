@@ -2,7 +2,19 @@
   {% block head %}
     <link rel='stylesheet' type='text/css' href='/static/style.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script type='text/javascript' src='/static/function.js'></script>
+    <script>
+      $('document').ready(function() {
+        var percent_width = 100*$('span').width()/$('span').offsetParent().width()
+        if (percent_width <= 50) {
+	  $('div').addClass('red');
+	}
+        else if (percent_width > 50 && width <= 85) {
+	  $('div').addClass('orange');
+ 	}
+	else {
+	}
+      });
+    </script>
   {% endblock %}  
 
   {% block title %}
@@ -20,7 +32,7 @@
     <br>
     
     <div class="meter">
-      <span style="width: {{ total }}%;"></span>
+      <span style="width: {{ total }};"></span>
     </div>
     
     <br><br>
