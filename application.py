@@ -3,12 +3,14 @@ from driver import get_total_scan_score
 from flask import Flask, render_template, url_for
 from flask_bootstrap import Bootstrap
 
+
 def create_app():
 	app = Flask(__name__)
 	Bootstrap(app)
 	return app
 
 app = create_app()
+app.debug = True
 
 ROOT_TEMPLATE = 'root.html'
 LOAD_TEMPLATE = 'load.html'
