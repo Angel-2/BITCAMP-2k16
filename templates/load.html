@@ -1,17 +1,14 @@
 {% extends "bootstrap/base.html" %}
+
   {% block head %}
     <link rel='stylesheet' type='text/css' href='/static/style.css'>
-  {% endblock %}  
+  {% endblock %}
 
   {% block title %}
-    let's see how cool you are
+    LOAD THAT MF IF YOU SMASHED
   {% endblock %}
 
   {% block content %}
-    <h1>Score</h1>
-    <p id='score'>you're {{ total }} cool!</p>
-    <div class="meter">
-      <span style="width: {{ total }}%;"></span>
-    </div>
+    <h1>Scanning</h1>
+    <div class='loader'></div>
   {% endblock %}
-

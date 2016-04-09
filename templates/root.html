@@ -1,11 +1,44 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html lang="en">
-  <head>
-    <title>real scanning hours</title>
-  </head>
-  <body>
-    <div>
-      <p>nmap that mf IP Range if you up</p>
-    </div>
-  </body>
-</html>
+{% extends "bootstrap/base.html" %}
+  
+  {% block head %}
+    <link rel='stylesheet' type='text/css' href='/static/style.css'>
+  {% endblock %}
+  
+  {% block title %}
+    real scanning hours
+  {% endblock %}
+  
+  {% block content %}
+    <h1>Pido</h1>
+    
+    <form action='/load'>
+      
+      <p class='instruction'>Select your WiFi network</p>
+      
+      <div class='parent'>
+        <select class='child select form-control'>
+          <option>Select a network</option>
+          <option>Network 1</option>
+          <option>Network 2</option>
+          <option>Network 3</option>
+          <option>Network 4</option>
+          <option>Network 5</option>
+        </select>'
+      </div>
+      
+      <br>
+      
+      <p class='instruction'>Enter your WiFi password</p>
+      
+      <div class='parent'>
+        <input type='password' class='child form-control'></input>
+      </div>
+      
+      <br>
+      
+      <div class='parent'>
+        <button class='child btn btn-default'>Submit</select>
+      </div>
+
+    </form> 
+  {% endblock %}
