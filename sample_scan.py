@@ -4,4 +4,4 @@
 
 class Sample_Scan:
     def run_scan(self):
-        return 100 # way hella
+        return (100, "no problems with the Sample Scan") # way hella

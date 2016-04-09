@@ -7,11 +7,15 @@ import spur
 
 SSH_PORT = '22'
 SSH_PORT_NUM = int(SSH_PORT)
+DEFAULT_REPORT = "No problems with SSH"
 
 auths = [['admin', 'admin'], ['admin', 'password'], ['root', 'root'], ['root', 'password']]
 
 class SSH_Scan:
     def run_scan(self):
+        score = 100
+        report = ""
+        
         nm = nmap.PortScanner()
         nm.scan('192.168.0.1/16', SSH_PORT) # scan everything on default ssh port
         for host in nm.all_hosts():
@@ -22,7 +26,10 @@ class SSH_Scan:
                     shell = spur.SshShell(hostname = host, username = auth[0], password = auth[1], missing_host_key = spur.ssh.MissingHostKey.accept)
                     try:
                         result = shell.run(['ls'])
-                        return 0 # we only get here if the ssh connected!
+                        score -= 50 # we only get here if the ssh connected!
+                        if score < 0:
+                            score = 0
+                        report += "\nVulernable SSH server with username and password (%s, %s) found at address %s" % (auth[0], auth[1], host)
                     except:
                         continue
-        return 100 # way hella
+        return (score, report if score < 100 else DEFAULT_REPORT) # way hella

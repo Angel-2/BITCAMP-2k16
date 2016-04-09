@@ -8,11 +8,15 @@ import telnetlib
 
 TELNET_PORT = '23'
 TELNET_PORT_NUM = int(TELNET_PORT)
+DEFAULT_REPORT = "No problems with telnet"
 
 auths = [['', ''], ['admin', 'admin'], ['admin', 'password'], ['root', 'root'], ['root', 'password']] # blank auth is anon login
 
 class Telnet_Scan:
     def run_scan(self):
+        score = 100
+        report = ""
+        
         nm = nmap.PortScanner()
         nm.scan('192.168.0.1/16', TELNET_PORT) # scan everything on default telnet port
         for host in nm.all_hosts():
@@ -36,7 +40,10 @@ class Telnet_Scan:
                             continue
                         else:
                             if any(map(lambda x: x in res, ["#", "$", ">"])) or len(res) > 500:
-                                return 0
+                                score -= 50
+                                if score < 0:
+                                    score = 0
+                                report += "\nVulnerable Telnet server with username and password (%s, %s) found at address %s" % (auth[0], auth[1], host)
                     except:
                         continue
         return 100 # way hella

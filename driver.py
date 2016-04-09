@@ -15,6 +15,10 @@ SCANS = [Sample_Scan(), Wifi_Type_Scan(), Wifi_Admin_Scan(), Mongo_Scan(), SSH_S
 
 def get_total_scan_score():
     total = 0
+    report = ""
     for scan in SCANS:
-        total += scan.run_scan()
+        subtotal, subreport = scan.run_scan()
+        total += subtotal
+        report += "\n%s" % subreport
+    print report # TODO: actually return this
     return total
