@@ -4,7 +4,7 @@
 
 from sample_scan import Sample_Scan
 from wifi_type import Wifi_Type_Scan
-from mongo_scan import Mongo_Scan
+from mongo import Mongo_Scan
 
 from wifi_admin import Wifi_Admin_Scan
 
