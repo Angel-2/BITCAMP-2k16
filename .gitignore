@@ -1,2 +1,3 @@
 # ignore emacs backups
 *~
+*.pyc
