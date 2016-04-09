@@ -1,6 +1,8 @@
 {% extends "bootstrap/base.html" %}
   {% block head %}
     <link rel='stylesheet' type='text/css' href='/static/style.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type='text/javascript' src='/static/function.js'></script>
   {% endblock %}  
 
   {% block title %}
@@ -8,10 +10,24 @@
   {% endblock %}
 
   {% block content %}
-    <h1>Score</h1>
-    <p id='score'>you're {{ total }} cool!</p>
+    
+    <h1 id='network_name'>Scan Results for {{network}}</h1>
+    
+    <br>
+    
+    <p id='score'>Your Security Score: {{ total }}/100 points</p>
+    
+    <br>
+    
     <div class="meter">
       <span style="width: {{ total }}%;"></span>
     </div>
+    
+    <br><br>
+
+    <p class='instruction'>The following PDF contains detailed information about the specific vulnerabilitites on your network. Please download the file and send it to your local tech support group, who can use the information to secure your network.</p>
+
+    <p class='instruction'>SecurityVulnerabilities.pdf</p>     
+
   {% endblock %}
 
