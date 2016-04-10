@@ -19,23 +19,26 @@ def get_my_score(scan):
 
 pool = Pool(processes=len(ASYNC_SCANS))
 def get_total_scan_score():
+	print "hi"
 	total = 0
 	totals =  []
 	synchronous_sum = []
 	for scan in ASYNC_SCANS:
+		print scan
 		totals.append(pool.apply_async(get_my_score, args=(scan,)))
 	for scan in SYNC_SCANS:
 		print scan
 		synchronous_sum.append(scan.run_scan())
 	pool.close()
 	pool.join()
-	SCANS = [total.get() for total in totals].append(synchronous_sum)
-        total = 0
-        report = ""
-        for scan in SCANS:
-            subtotal = scan[0]
-	    subreport = scan[1]
-            total += subtotal
-            report += "\n%s" % subreport
-        print report # TODO: actually return this
-        return total
+	SCANS = [total.get() for total in totals]
+	SCANS.append(synchronous_sum)
+	total = 0
+	report = ""
+	for scan in SCANS:
+		subtotal = scan[0]
+		subreport = scan[1]
+		total += subtotal
+		report += "\n%s" % subreport
+	print report # TODO: actually return this
+	return total

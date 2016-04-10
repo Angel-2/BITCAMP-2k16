@@ -29,7 +29,7 @@ class Exploit(exploits.Exploit):
     invalid = {"min": 0, "max": 0}
 
     def run(self):
-        print_status("Running module...")
+        #print_status("Running module...")
 
         self.credentials = []
         url = sanitize_url("{}:{}{}".format(self.target, self.port, self.path))
@@ -37,19 +37,19 @@ class Exploit(exploits.Exploit):
         try:
             r = requests.get(url)
         except (requests.exceptions.MissingSchema, requests.exceptions.InvalidSchema):
-            print_error("Invalid URL format: %s" % url)
-            return
+            #print_error("Invalid URL format: %s" % url)
+            return (100, 'No scan')
         except requests.exceptions.ConnectionError:
-            print_error("Connection error: %s" % url)
-            return
+            #print_error("Connection error: %s" % url)
+            return (100, 'No scan')
 
         # authentication type 
         if self.form == 'auto':
             self.data = self.detect_form()
 
             if self.data == None:
-                print_error("Could not detect form")
-                return
+                #print_error("Could not detect form")
+                return (100, 'No form detected')
         else:
             self.data = self.form
 

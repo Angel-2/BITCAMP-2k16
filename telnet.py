@@ -47,4 +47,4 @@ class Telnet_Scan:
                                 report += "\nVulnerable Telnet server with username and password (%s, %s) found at address %s" % (auth[0], auth[1], host)
                     except:
                         continue
-        return 100 # way hella
+        return (score, report) # way hella
