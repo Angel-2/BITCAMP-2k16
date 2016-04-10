@@ -7,11 +7,12 @@ from pymongo import MongoClient
 
 MONGO_PORT = '27017'
 MONGO_PORT_NUM = int(MONGO_PORT)
+range = 'localhost'
 
 class Mongo_Scan:
     def run_scan(self):
         nm = nmap.PortScanner()
-        nm.scan('192.168.0.1/16', MONGO_PORT) # scan everything on default mongo port
+        nm.scan(range, MONGO_PORT) # scan everything on default mongo port
         for host in nm.all_hosts():
             if nm[host].has_tcp(MONGO_PORT_NUM) and nm[host]['tcp'][MONGO_PORT_NUM]['state'] == 'open':
               # for each host that's open on MONGO_PORT, try to connect

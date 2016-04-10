@@ -9,8 +9,6 @@ def create_app():
 	return app
 
 app = create_app()
-app.debug = True
-
 ROOT_TEMPLATE = 'root.html'
 LOAD_TEMPLATE = 'load.html'
 SCAN_TEMPLATE = 'scan.html'
@@ -29,4 +27,4 @@ def redirect_scan():
     return render_template(SCAN_TEMPLATE, total=total, network=request.form["network"], password_field=request.form["password_field"])
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=5000, debug=True)

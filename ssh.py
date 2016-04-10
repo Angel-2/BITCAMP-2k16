@@ -9,11 +9,12 @@ SSH_PORT = '22'
 SSH_PORT_NUM = int(SSH_PORT)
 
 auths = [['admin', 'admin'], ['admin', 'password'], ['root', 'root'], ['root', 'password']]
+range = 'localhost'
 
 class SSH_Scan:
     def run_scan(self):
         nm = nmap.PortScanner()
-        nm.scan('192.168.0.1/16', SSH_PORT) # scan everything on default ssh port
+        nm.scan('localhost', SSH_PORT) # scan everything on default ssh port
         for host in nm.all_hosts():
             if nm[host].has_tcp(SSH_PORT_NUM) and nm[host]['tcp'][SSH_PORT_NUM]['state'] == 'open':
                 # for each host that's open on SSH_PORT, try to connect
