@@ -14,6 +14,7 @@ DEFAULT_REPORT = "No problems with telnet"
 auths = [['', ''], ['admin', 'admin'], ['admin', 'password'], ['root', 'root'], ['root', 'password']] # blank auth is anon login
 
 class Telnet_Scan:
+    name = "Telnet Common Password Scan"
     def run_scan(self):
         score = 100
         report = ""
@@ -47,4 +48,4 @@ class Telnet_Scan:
                                 report += "\nVulnerable Telnet server with username and password (%s, %s) found at address %s" % (auth[0], auth[1], host)
                     except:
                         continue
-        return (score, report if score < 100 else DEFAULT_REPORT) # way hella
+        return (score, report) # way hella

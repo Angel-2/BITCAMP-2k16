@@ -18,6 +18,7 @@ def get_default_gateway():
 
 class Wifi_Admin_Scan:
 
+    name = "Wifi Access Scan"
 
     def brute_scanner(self, module):
         brute = module.Exploit()

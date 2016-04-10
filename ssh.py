@@ -13,6 +13,7 @@ auths = [['admin', 'admin'], ['admin', 'password'], ['root', 'root'], ['root', '
 range = '192.168.*'
 
 class SSH_Scan:
+    name = "SSH common password scan"
     def run_scan(self):
         score = 100
         report = ""

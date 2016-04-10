@@ -5,5 +5,3 @@
 *.swp
 # ignore compiled python files
 *.pyc
-# pcap dump
-dump.pcap

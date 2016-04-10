@@ -3,5 +3,6 @@
 # 100 is the best score, 0 is the worst
 
 class Sample_Scan:
+    name = "Test Scan"
     def run_scan(self):
         return (100, "No problems with the test scan plugin.") # way hella

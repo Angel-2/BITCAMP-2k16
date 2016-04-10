@@ -1,42 +1,65 @@
 {% extends "bootstrap/base.html" %}
-  
-  {% block head %}
+
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <script type="application/javascript" src="/static/piguard.js"></script>
     <link rel='stylesheet' type='text/css' href='/static/style.css'>
-  {% endblock %}
-  
-  {% block title %}
-    real scanning hours
-  {% endblock %}
-  
-  {% block content %}
-    <h1>PyScan</h1>
-    
-    <form method="post" action='/scan'>
-      
-      <p class='instruction'>Select your WiFi network</p>
-      
-      <div class='parent'>
-        <select class='child select form-control' name='network'>
-          <option>Select a network</option>
-          <option id='network_1'>Network 1</option>
-          <option id='network_2'>Network 2</option>
-          <option id='network_3'>Network 3</option>
-          <option id='network_4'>Network 4</option>
-          <option id='network_5'>Network 5</option>
-        </select>'
-      </div>
-            
-      <p class='instruction'>Enter your WiFi password</p>
-      
-      <div class='parent'>
-        <input type='password' id='input_text' name='password_field' class='child form-control'></input>
-      </div>
-                
-      <p class='instruction'>Search for vulnerabilities</p>	
 
-      <div class='parent'>
-        <input type='submit' value='Submit' class='child btn btn-default'></input>
-      </div>
+{% endblock %}
 
-    </form> 
-  {% endblock %}
+{% block title %}
+    PiGuard - Cybersafety at the touch of a button.
+{% endblock %}
+
+{% block content %}
+    <div id="flex-parent">
+        <div id="title-div">
+            <h1>PiGuard</h1>
+        </div>
+        <div id="form-div">
+            <form id="wifi-info" method="post" action='/scan'>
+
+                <p class='instruction'>Select your WiFi network</p>
+
+                <div class='parent'>
+                    <select class='child select form-control' name='network'>
+                        <option>Select a network</option>
+                        {% for network in networks %}
+                        <option id=" {{ network }} " value= " {{ network }} "> {{ network }} </option>
+                        {% endfor %}
+                    </select>'
+                </div>
+
+                <p class='instruction'>Enter your WiFi password</p>
+
+                <div class='parent'>
+                    <input type='password' id='input_text' name='password_field' class='child form-control'/>
+                </div>
+
+                <p class='instruction'>Search for vulnerabilities</p>
+
+                <div class='parent'>
+                    <button type="submit" href="#" class="btn btn-default" data-reveal-id="modal">Audit my network</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal" class="reveal-modal-bg" style="display: none">
+        <div class="cssload-thecube">
+            <div class="cssload-cube cssload-c1"></div>
+
+            <div class="cssload-cube cssload-c2"></div>
+
+            <div class="cssload-cube cssload-c4"></div>
+
+            <div class="cssload-cube cssload-c3"></div>
+            <br>
+
+            Please wait while we assess your network. It'll only take a minute!
+        </div>
+    </div>
+{% endblock %}

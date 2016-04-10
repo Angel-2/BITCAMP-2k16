@@ -39,4 +39,3 @@ ecdsa
 paramiko
 pycrypto
 spur
-pypcap

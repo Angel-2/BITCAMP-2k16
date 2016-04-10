@@ -3,21 +3,22 @@
 # 100 is the best score, 0 is the worst
 import subprocess
 import time
+import requests
+import json
 
-class Sample_Scan:
+class Snort_Scan:
 
 
     name = "Snort Alert Detected"
+    def launch_scan(self):
+        subp = subprocess.Popen(["sudo ./capture.sh"], shell=True)
+
+
     def run_scan(self):
-        subp = subprocess.Popen(["snort -c /etc/snort/snort.conf -i wlan1 -A fast -q > result_scan.txt"], shell=True)
-        time.sleep(30)
-        print "test"
-
-        return (100, "No problems with the test scan plugin.") # way hella
-
-
-
-testScan = Sample_Scan()
-
-testScan.run_scan()
-
+        try:
+            if 'classtype' in open('snort_results.txt'):
+                return (10, "Our snort server detected suspicous activity on your network that may be indicative of malware.")
+            else:
+                return (100, "No malware detected on network.") # way hella
+        except:
+                return (100, "No malware detected on network.")

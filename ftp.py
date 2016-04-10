@@ -14,6 +14,9 @@ DEFAULT_REPORT = "No FTP problems"
 auths = [['', ''], ['admin', 'admin'], ['admin', 'password'], ['root', 'root'], ['root', 'password']] # blank auth is anon login
 
 class FTP_Scan:
+
+    name = "File Transfer Protocol Common Password Scanner"
+
     def run_scan(self):
         score = 100
         report = ""
