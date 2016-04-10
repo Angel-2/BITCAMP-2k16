@@ -8,9 +8,13 @@ from pymongo import MongoClient
 MONGO_PORT = '27017'
 MONGO_PORT_NUM = int(MONGO_PORT)
 range = 'localhost'
+DEFAULT_REPORT = "No problems with MongoDB"
 
 class Mongo_Scan:
     def run_scan(self):
+        score = 100
+        report = ""
+        
         nm = nmap.PortScanner()
         nm.scan(range, MONGO_PORT) # scan everything on default mongo port
         for host in nm.all_hosts():
@@ -21,5 +25,8 @@ class Mongo_Scan:
                   client.close()
                   continue
               else: # connection!
-                  return 0
-        return 100 # way hella
+                  score -= 50
+                  if score < 0:
+                      score = 0
+                  report += "\nVulnerable MongoDB server found at address %s" % (host)
+        return (score, report if score < 100 else DEFAULT_REPORT) # way hella

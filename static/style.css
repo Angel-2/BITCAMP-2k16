@@ -44,6 +44,16 @@ h1 {
   box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
 }
 
+.orange > span {
+  background-color: #f1a165;
+  background-image: linear-gradient(to bottom, #f1a165, #f36d0a);
+}
+
+.red > span {
+  background-color: #f0a3a3;
+  background-image: linear-gradient(to bottom, #f0a3a3, #f42323);
+}
+
 .meter > span {
   display: block;
   height: 100%;

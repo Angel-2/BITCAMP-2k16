@@ -10,20 +10,28 @@ wifi_ssid = "EventWifi 2.4ghz"
 interface = "wlan0"
 filter = lambda cell : match(wifi_ssid, cell.ssid)
 
+DEFAULT_REPORT = "No problems with the WiFi type"
 
 class Wifi_Type_Scan:
     def run_scan(self):
+        score = 100
+        report = ""
+        
 	scan = Cell.where(interface, filter)
 	if(len(scan) > 0):
 		network = scan[0]
 		if(network.encrypted):
 			if(network.encryption_type is 'wep'):
-				return 10
+				score = 10
+                                report = "Vulnerable (WEP) network found"
 			if(network.encryption_type is 'wpa'):
-				return 20
+				score = 20
+                                report = "Vulnerable (WPA) network found"
 			if(network.encryption_type is 'wpa2'):
-				return 100
+                                score = 100
 			else:
-				return 100
+				score = 100
 		else:
-			return 0
+			score = 0
+                        report = "Highly vulnerable unsecured network found"
+        return (score, report if score < 100 else DEFAULT_REPORT)
