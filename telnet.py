@@ -8,6 +8,7 @@ import telnetlib
 
 TELNET_PORT = '23'
 TELNET_PORT_NUM = int(TELNET_PORT)
+range = 'localhost'
 DEFAULT_REPORT = "No problems with telnet"
 
 auths = [['', ''], ['admin', 'admin'], ['admin', 'password'], ['root', 'root'], ['root', 'password']] # blank auth is anon login
@@ -18,7 +19,7 @@ class Telnet_Scan:
         report = ""
         
         nm = nmap.PortScanner()
-        nm.scan('192.168.0.1/16', TELNET_PORT) # scan everything on default telnet port
+        nm.scan(range, TELNET_PORT) # scan everything on default telnet port
         for host in nm.all_hosts():
             if nm[host].has_tcp(TELNET_PORT_NUM) and nm[host]['tcp'][TELNET_PORT_NUM]['state'] == 'open':
                 # for each host that's open on TELNET_PORT, try to connect

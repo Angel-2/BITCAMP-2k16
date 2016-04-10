@@ -7,6 +7,8 @@ import ftplib
 
 FTP_PORT = '21'
 FTP_PORT_NUM = int(FTP_PORT)
+
+range = 'localhost'
 DEFAULT_REPORT = "No FTP problems"
 
 auths = [['', ''], ['admin', 'admin'], ['admin', 'password'], ['root', 'root'], ['root', 'password']] # blank auth is anon login
@@ -17,7 +19,7 @@ class FTP_Scan:
         report = ""
         
         nm = nmap.PortScanner()
-        nm.scan('192.168.0.1/16', FTP_PORT) # scan everything on default ftp port
+        nm.scan(range, FTP_PORT) # scan everything on default ftp port
         for host in nm.all_hosts():
             if nm[host].has_tcp(FTP_PORT_NUM) and nm[host]['tcp'][FTP_PORT_NUM]['state'] == 'open':
                 # for each host that's open on FTP_PORT, try to connect
