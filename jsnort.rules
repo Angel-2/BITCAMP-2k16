@@ -1,0 +1,2 @@
+alert tcp any any -> any 80 (content:"hoyamalware"; msg:"malware detected on the network matching snort rule 20342"; sid:9999991;)
+alert tcp any any -> 192.168.0.1 22 (msg:"someone's trying to SSH into our router!"; sid:1000000;)
