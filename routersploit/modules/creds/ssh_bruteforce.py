@@ -35,7 +35,7 @@ class Exploit(exploits.Exploit):
         except socket.error:
             # print_error("Connection error: %s:%s" % (self.target, str(self.port)))
             ssh.close()
-            return
+            return (100, "No SSH server running.")
         except:
             pass
 
@@ -58,8 +58,9 @@ class Exploit(exploits.Exploit):
             print_success("Credentials found!")
             headers = ("Login", "Password")
             print_table(headers, *self.credentials)
+            return (1, "SSH server found vulnerable for following credentials " + self.credentials)
         else:
-            print_error("Credentials not found")
+            return (100, "SSH passwords appear secure.\n")
             
     def target_function(self, running, data):
         name = threading.current_thread().name
@@ -79,6 +80,8 @@ class Exploit(exploits.Exploit):
             except paramiko.ssh_exception.SSHException as err:
                 ssh.close()
                 # print_error(name, err, user, password)
+            except:
+                pass
             else:
                 running.clear()
                 print_success("{}: Authentication succeed!".format(name), user, password)

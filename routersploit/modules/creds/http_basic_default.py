@@ -55,8 +55,9 @@ class Exploit(exploits.Exploit):
             print_success("Credentials found!")
             headers = ("Login", "Password")
             print_table(headers, *self.credentials)
+            return (10, "The Following Router HTTP credentials are unsafe " + str(*self.credentials) + "\n")
         else:
-            print_error("Credentials not found")
+            return (100, "Router HTTP passwords appear secure.\n")
 
     def target_function(self, running, data):
         name = threading.current_thread().name
@@ -79,5 +80,7 @@ class Exploit(exploits.Exploit):
                     print_error(name, "Authentication Failed - Username: '{}' Password: '{}'".format(user, password))
             except StopIteration:
                 break
+            except:
+                pass
 
         print_status(name, 'process is terminated.')
