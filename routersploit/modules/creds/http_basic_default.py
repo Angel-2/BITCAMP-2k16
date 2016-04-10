@@ -12,7 +12,8 @@ class Exploit(exploits.Exploit):
     __info__ = {
         'name': 'HTTP Basic Default Creds',
         'author': [
-            'Marcin Bury <marcin.bury[at]reverse-shell.com>' # routersploit module
+            'Marcin Bury <marcin.bury[at]reverse-shell.com>' # routersploit module,
+            'James Pavur - modified for piauditing'
          ]
     }
 
@@ -32,15 +33,15 @@ class Exploit(exploits.Exploit):
         try:
             r = requests.get(url)
         except (requests.exceptions.MissingSchema, requests.exceptions.InvalidSchema):
-            print_error("Invalid URL format: %s" % url)
-            return
+         #   print_error("Invalid URL format: %s" % url)
+            return (0, "No HTTP basic auth scan.")
         except requests.exceptions.ConnectionError:
-	    print_error("Connection error: %s" % url)
-            return
+	    #print_error("Connection error: %s" % url)
+            return (0, "No HTTP basic auth scan.")
 
         if r.status_code != 401:
-            print_status("Target is not protected by Basic Auth")
-            return
+            #print_status("Target is not protected by Basic Auth")
+            return (100, "No HTTP basic auth vulnerability.")
 
         if self.defaults.startswith('file://'):
             defaults = open(self.defaults[7:], 'r')

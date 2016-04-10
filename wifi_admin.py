@@ -37,17 +37,19 @@ class Wifi_Admin_Scan:
             nm = nmap.PortScanner()
             nm.scan(gateway, '21, 22, 23, 80')
 
-            if(nm[gateway].has_tcp('21')):
+            if(nm[gateway].has_tcp(21)):
                 scores.append(self.threader.apply_async(ftp_scan))
-            if(nm[gateway].has_tcp('22')):
+            if(nm[gateway].has_tcp(22)):
                 scores.append(self.threader.apply_async(ssh_scan))
-            if(nm[gateway].has_tcp('23')):
+            if(nm[gateway].has_tcp(23)):
                 scores.append(self.threader.apply_async(telnet_scan))
-            if(nm[gateway]).has_tcp('80'):
+            if(nm[gateway]).has_tcp(80):
                 scores.append(self.threader.apply_async(http_scan))
 
             self.threader.close()
             self.threader.join()
-            return 100 # way hella
 
-scan = Wifi_Admin_Scan().run_scan()
+            score_list = [score.get() for score in scores]
+            score = int(sum([score[0] for score in score_list])/score_list)
+            response = "".join([score[1] for score in score_list])
+            return score, response # way hella
